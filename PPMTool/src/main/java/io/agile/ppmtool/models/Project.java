@@ -1,5 +1,6 @@
 package io.agile.ppmtool.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,10 +20,15 @@ public class Project {
     private String projectName;
     private String projectIdentifier;
     private String description;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date start_date;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date end_date;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
 
     @PrePersist
