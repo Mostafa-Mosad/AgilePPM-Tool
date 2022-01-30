@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -17,8 +19,18 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Project name is required")
+    @Size(min = 8, max = 50, message = "Please use from 8 to 50 characters")
     private String projectName;
+
+    @Column(unique = true, updatable = false)
+    @NotBlank(message = "Project identifier is required")
+    @Size(min = 5, max = 11, message = "Please use from 5 to 11 characters")
     private String projectIdentifier;
+
+    @NotBlank(message = "Project description is required")
+    @Size(min = 20, message = "Please use from 20 to 60 characters")
     private String description;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
