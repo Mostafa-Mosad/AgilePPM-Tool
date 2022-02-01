@@ -18,4 +18,14 @@ public class ProjectService {
     public Project createProject(Project project) {
         return projectRepository.save(project);
     }
+
+    public Project getProjectByIdentifier(String projectIdentifier) {
+        try {
+            Project project = projectRepository.getProjectByProjectIdentifier(projectIdentifier);
+            return project;
+        }
+        catch (Exception ex) {
+            throw new PRoje
+        }
+    }
 }
