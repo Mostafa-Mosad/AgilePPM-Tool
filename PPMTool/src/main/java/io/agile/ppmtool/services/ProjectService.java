@@ -41,4 +41,14 @@ public class ProjectService {
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
     }
+
+    public void deleteProjectById(Long projectId) {
+        try{
+            Project project = projectRepository.findById(projectId).get();
+            projectRepository.deleteById(projectId);
+        }
+        catch (Exception ex) {
+            throw new ProjectNotFoundException();
+        }
+    }
 }
