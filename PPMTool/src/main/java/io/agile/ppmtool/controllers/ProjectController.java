@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.xml.ws.Response;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/project")
@@ -33,5 +34,11 @@ public class ProjectController {
     public ResponseEntity<Project> getProjectByIdentifier(@PathVariable String projectIdentifier) {
         Project project = projectService.getProjectByIdentifier(projectIdentifier);
         return new ResponseEntity<>(project, HttpStatus.OK);
+    }
+
+    @GetMapping("/getallprojects")
+    public ResponseEntity<List<Project>> getAllProjects() {
+        List<Project> projects = projectService.getAllProjects();
+        return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 }

@@ -7,6 +7,8 @@ import io.agile.ppmtool.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProjectService {
 
@@ -34,5 +36,9 @@ public class ProjectService {
         catch (Exception ex) {
             throw new ProjectNotFoundException();
         }
+    }
+
+    public List<Project> getAllProjects() {
+        return projectRepository.findAll();
     }
 }
