@@ -1,6 +1,7 @@
 package io.agile.ppmtool.services;
 
 import io.agile.ppmtool.exceptions.ProjectIdentifierException;
+import io.agile.ppmtool.exceptions.ProjectNotFoundException;
 import io.agile.ppmtool.models.Project;
 import io.agile.ppmtool.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,11 @@ public class ProjectService {
 
     public Project getProjectByIdentifier(String projectIdentifier) {
         try {
-            Project project = projectRepository.getProjectByProjectIdentifier(projectIdentifier);
+            Project project = projectRepository.getProjectByProjectIdentifier(projectIdentifier).get();
             return project;
         }
         catch (Exception ex) {
-            throw new PRoje
+            throw new ProjectNotFoundException();
         }
     }
 }
