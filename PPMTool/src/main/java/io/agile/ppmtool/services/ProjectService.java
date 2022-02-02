@@ -42,6 +42,13 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
+    public Project updateProjectById(Long projectId, Project project) {
+        try{
+            Project savedProject = projectRepository.findById(projectId).get();
+            
+        }
+    }
+
     public void deleteProjectById(Long projectId) {
         try{
             Project project = projectRepository.findById(projectId).get();
