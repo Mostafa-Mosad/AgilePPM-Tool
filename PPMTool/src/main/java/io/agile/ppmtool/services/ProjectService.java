@@ -1,6 +1,7 @@
 package io.agile.ppmtool.services;
 
 import io.agile.ppmtool.dto.ProjectDTO;
+import io.agile.ppmtool.dto.ProjectDTOMapper;
 import io.agile.ppmtool.exceptions.ProjectIdentifierException;
 import io.agile.ppmtool.exceptions.ProjectNotFoundException;
 import io.agile.ppmtool.models.Project;
@@ -15,11 +16,12 @@ import java.util.List;
 public class ProjectService {
 
     private ProjectRepository projectRepository;
-    private ModelMapper mapper = new ModelMapper();
+    private ProjectDTOMapper projectDTOMapper;
 
     @Autowired
-    public ProjectService(ProjectRepository projectRepository) {
+    public ProjectService(ProjectRepository projectRepository, ProjectDTOMapper projectDTOMapper) {
         this.projectRepository = projectRepository;
+        this.projectDTOMapper = projectDTOMapper;
     }
 
     public Project createProject(Project project) {
@@ -48,8 +50,8 @@ public class ProjectService {
     public Project updateProjectById(Long projectId, Project project) {
         try{
             Project savedProject = projectRepository.findById(projectId).get();
-            ProjectDTO projectDTO = ProjectDTO.mapEntityToDto(project);
-            Project updatedProject = ProjectDTO.mapDtoToEntity(projectDTO, savedProject);
+            ProjectDTO projectDTO = projectDTOMapper.mapEntityToDto(project);
+            Project updatedProject = projectDTOMapper.mapDtoToEntity(projectDTO, savedProject);
             return projectRepository.save(updatedProject);
         }
         catch (Exception ex) {

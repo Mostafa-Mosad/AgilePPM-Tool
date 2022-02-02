@@ -16,17 +16,4 @@ public class ProjectDTO {
     @NotBlank
     String description;
 
-    public static ProjectDTO mapEntityToDto(Project project) {
-        ProjectDTO projectDTO = new ProjectDTO();
-        projectDTO.setId(project.getId());
-        projectDTO.setProjectName(project.getProjectName());
-        projectDTO.setDescription(project.getDescription());
-        return projectDTO;
-    }
-
-    public static Project mapDtoToEntity(ProjectDTO projectDTO, Project project) {
-        project.setProjectName(projectDTO.getProjectName());
-        project.setDescription(projectDTO.getDescription());
-        return project;
-    }
 }
