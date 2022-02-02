@@ -51,4 +51,14 @@ public class ProjectService {
             throw new ProjectNotFoundException();
         }
     }
+
+    public void deleteProjectByIdentifier(String projectIdentifier) {
+        try{
+            Project project = projectRepository.getProjectByProjectIdentifier(projectIdentifier).get();
+            projectRepository.delete(project);
+        }
+        catch (Exception ex) {
+            throw new ProjectNotFoundException();
+        }
+    }
 }
