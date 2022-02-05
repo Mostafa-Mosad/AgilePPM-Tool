@@ -83,7 +83,7 @@ public class ProjectTests {
 
         when(projectRepository.findById(project.getId())).thenReturn(java.util.Optional.ofNullable(project));
         when(projectRepository.save(updateProject)).thenReturn(updateProject);
-        Project updatedProject = projectService.updateProjectById(project.getId(), updateProject);
+        Project updatedProject = projectService.updateProjectById(project.getId(), proje);
 
         assertEquals(1L, updatedProject.getId());
         assertEquals("PO-01", updatedProject.getProjectIdentifier());
