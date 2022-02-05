@@ -1,5 +1,6 @@
 package io.agile.ppmtool.controllers;
 
+import io.agile.ppmtool.dto.ProjectDTO;
 import io.agile.ppmtool.exceptions.ArgumentNotValidException;
 import io.agile.ppmtool.models.Project;
 import io.agile.ppmtool.services.ProjectService;
@@ -43,8 +44,8 @@ public class ProjectController {
     }
 
     @PutMapping("/updateproject/{projectId}")
-    public ResponseEntity<Project> updateProject(@Valid @RequestBody Project project, @PathVariable Long projectId) {
-        Project updatedProject = projectService.updateProjectById(projectId, project);
+    public ResponseEntity<Project> updateProject(@Valid @RequestBody ProjectDTO projectDTO, @PathVariable Long projectId) {
+        Project updatedProject = projectService.updateProjectById(projectId, projectDTO);
         return new ResponseEntity<>(updatedProject, HttpStatus.OK);
     }
 
