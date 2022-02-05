@@ -47,10 +47,9 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
-    public Project updateProjectById(Long projectId, Project project) {
+    public Project updateProjectById(Long projectId, ProjectDTO projectDTO) {
         try{
             Project savedProject = projectRepository.findById(projectId).get();
-            ProjectDTO projectDTO = projectDTOMapper.mapEntityToDto(project);
             Project updatedProject = projectDTOMapper.mapDtoToEntity(projectDTO, savedProject);
             return projectRepository.save(updatedProject);
         }
