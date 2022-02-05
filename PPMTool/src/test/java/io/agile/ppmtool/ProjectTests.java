@@ -29,11 +29,14 @@ public class ProjectTests {
 
     Project project;
 
+    Project updateProject;
+
     List<Project> projects;
 
     @BeforeEach
     public void setup() {
         project = new Project(1L, "Test Project", "PO-01", "Project test description", new Date(), null, new Date(), null);
+        updateProject = new Project(1L, "Test Project updated", "PO-01", "Project test description updated", new Date(), null, new Date(), null);
         projects = Arrays.asList(project,  new Project(2L, "Test Project2", "PO-02", "Project test description2", new Date(), null, new Date(), null));
     }
 
@@ -74,8 +77,23 @@ public class ProjectTests {
     }
 
     @Test
-    @DisplayName("Unit Test | Delete Project By Id")
+    @DisplayName("Unit Test | Update Project")
     @Order(4)
+    public void test_updateProject() {
+
+        when(projectRepository.findById(project.getId())).thenReturn(java.util.Optional.ofNullable(project));
+        when(projectRepository.save(updateProject)).thenReturn(updateProject);
+        Project updatedProject = projectService.updateProjectById(project.getId(), updateProject);
+
+        assertEquals(1L, updatedProject.getId());
+        assertEquals("PO-01", updatedProject.getProjectIdentifier());
+        assertEquals("Test Project updated", updatedProject.getProjectName());
+        assertEquals("Project test description updated", updatedProject.getDescription());
+    }
+
+    @Test
+    @DisplayName("Unit Test | Delete Project By Id")
+    @Order(5)
     public void test_deleteProjectById() {
 
         when(projectRepository.findById(project.getId())).thenReturn(java.util.Optional.ofNullable(project));
@@ -87,7 +105,7 @@ public class ProjectTests {
 
     @Test
     @DisplayName("Unit Test | Delete Project By Identifier")
-    @Order(5)
+    @Order(6)
     public void test_deleteProjectByIdentifier() {
 
         when(projectRepository.getProjectByProjectIdentifier(project.getProjectIdentifier())).thenReturn(java.util.Optional.ofNullable(project));
