@@ -47,11 +47,15 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
-    public Project updateProjectById(Long projectId, Project project) {
+    public Project updateProjectById(Long projectId, ProjectDTO projectDTO) {
         try{
             Project savedProject = projectRepository.findById(projectId).get();
+<<<<<<< Updated upstream
             ProjectDTO projectDTO = projectDTOMapper.mapEntityToDto(project);
             Project updatedProject = projectDTOMapper.mapDtoToEntity(projectDTO, savedProject);
+=======
+            Project updatedProject = ProjectDTO.mapDtoToEntity(projectDTO, savedProject);
+>>>>>>> Stashed changes
             return projectRepository.save(updatedProject);
         }
         catch (Exception ex) {
