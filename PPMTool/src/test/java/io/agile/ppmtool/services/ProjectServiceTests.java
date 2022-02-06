@@ -1,4 +1,4 @@
-package io.agile.ppmtool;
+package io.agile.ppmtool.services;
 
 import io.agile.ppmtool.dto.ProjectDTO;
 import io.agile.ppmtool.dto.ProjectDTOMapper;
@@ -6,9 +6,11 @@ import io.agile.ppmtool.models.Project;
 import io.agile.ppmtool.repositories.ProjectRepository;
 import io.agile.ppmtool.services.ProjectService;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -19,10 +21,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
 @DisplayName("Unit testing | Project Service")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class ProjectTests {
+@ExtendWith(MockitoExtension.class)
+public class ProjectServiceTests {
 
     @Mock
     ProjectRepository projectRepository;
