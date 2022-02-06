@@ -1,5 +1,7 @@
 package io.agile.ppmtool;
 
+import io.agile.ppmtool.dto.ProjectDTO;
+import io.agile.ppmtool.dto.ProjectDTOMapper;
 import io.agile.ppmtool.models.Project;
 import io.agile.ppmtool.repositories.ProjectRepository;
 import io.agile.ppmtool.services.ProjectService;
@@ -8,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -24,6 +27,9 @@ public class ProjectTests {
     @Mock
     ProjectRepository projectRepository;
 
+    @Mock
+    ProjectDTOMapper projectDTOMapper;
+
     @InjectMocks
     ProjectService projectService;
 
@@ -31,11 +37,14 @@ public class ProjectTests {
 
     Project updateProject;
 
+    ProjectDTO projectDTO;
+
     List<Project> projects;
 
     @BeforeEach
     public void setup() {
         project = new Project(1L, "Test Project", "PO-01", "Project test description", new Date(), null, new Date(), null);
+        projectDTO = new ProjectDTO(1L, "Test Project updated", "Project test description updated");
         updateProject = new Project(1L, "Test Project updated", "PO-01", "Project test description updated", new Date(), null, new Date(), null);
         projects = Arrays.asList(project,  new Project(2L, "Test Project2", "PO-02", "Project test description2", new Date(), null, new Date(), null));
     }
@@ -81,9 +90,10 @@ public class ProjectTests {
     @Order(4)
     public void test_updateProject() {
 
-        when(projectRepository.findById(project.getId())).thenReturn(java.util.Optional.ofNullable(project));
+        when(projectRepository.findById(projectDTO.getId())).thenReturn(java.util.Optional.ofNullable(project));
+        when(projectDTOMapper.mapDtoToEntity(projectDTO, project)).thenReturn(updateProject);
         when(projectRepository.save(updateProject)).thenReturn(updateProject);
-        Project updatedProject = projectService.updateProjectById(project.getId(), proje);
+        Project updatedProject = projectService.updateProjectById(1L, projectDTO);
 
         assertEquals(1L, updatedProject.getId());
         assertEquals("PO-01", updatedProject.getProjectIdentifier());
