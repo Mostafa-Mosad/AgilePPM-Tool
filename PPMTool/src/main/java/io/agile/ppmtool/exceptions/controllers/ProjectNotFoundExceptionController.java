@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ProjectNotFoundExceptionController {
 
     @ExceptionHandler(ProjectNotFoundException.class)
-    protected ResponseEntity<Object> projectNotFoundExceptionHandler() {
-        return new ResponseEntity<>("Project Not Found", HttpStatus.NOT_FOUND);
+    protected ResponseEntity<Object> projectNotFoundExceptionHandler(ProjectNotFoundException ex) {
+        return new ResponseEntity<>(ex.getErrorMessage(), HttpStatus.NOT_FOUND);
     }
 }

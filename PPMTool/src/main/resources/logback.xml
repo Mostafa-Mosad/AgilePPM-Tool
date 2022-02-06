@@ -1,0 +1,23 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<configuration>
+    <property resource="application-dev.properties"/>
+    <appender name = "STDOUT" class = "ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern> %black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable</pattern>
+        </encoder>
+    </appender>
+
+    <appender name = "FILE" class = "ch.qos.logback.core.FileAppender">
+        <File>
+           ${logging.file.path}
+        </File>
+        <encoder>
+            <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level = "INFO">
+        <appender-ref ref = "FILE"/>
+        <appender-ref ref = "STDOUT"/>
+    </root>
+</configuration>
