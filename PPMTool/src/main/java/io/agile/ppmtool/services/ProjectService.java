@@ -33,7 +33,7 @@ public class ProjectService {
         }
         catch (Exception ex) {
             log.error("ProjectService - createProject: Error while saving a new project: {}", project);
-            throw new ProjectIdentifierException();
+            throw new ProjectIdentifierException("Project Identifier '" + project.getProjectIdentifier() + "' already exist, project identifier should be unique!");
         }
     }
 

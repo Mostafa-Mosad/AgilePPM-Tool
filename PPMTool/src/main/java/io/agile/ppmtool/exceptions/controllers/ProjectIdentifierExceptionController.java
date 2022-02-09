@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ProjectIdentifierExceptionController  {
 
     @ExceptionHandler(ProjectIdentifierException.class)
-    protected ResponseEntity<Object> handleProjectIdentifierException(Exception ex) {
-        log.error("Project Identifier already exist, please use a different one!");
-        return new ResponseEntity<Object>("Project Identifier already exist, please use a different one!", HttpStatus.BAD_REQUEST);
+    protected ResponseEntity<Object> handleProjectIdentifierException(ProjectIdentifierException ex) {
+        log.error(ex.getErrorMessage());
+        return new ResponseEntity<Object>(ex.getErrorMessage(), HttpStatus.BAD_REQUEST);
     }
 }
