@@ -13,11 +13,8 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class ProjectDTO {
 
-    @Id
     Long id;
-    @NotBlank
     String projectName;
-    @NotBlank
     String description;
 
 }
